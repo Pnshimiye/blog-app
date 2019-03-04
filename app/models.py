@@ -8,7 +8,7 @@ class User(UserMixin,db.Model):
         id = db.Column(db.Integer,primary_key = True)
         username = db.Column(db.String(255),index = True)
         email = db.Column(db.String(255),unique = True,index = True)
-        post = db.relationship('Post',backref = 'user',lazy="dynamic")     
+        post = db.relationship('Post',backref = 'user',lazy="dynamic") 
 
         profile_pic_path = db.Column(db.String())
         pass_secure = db.Column(db.String(255))
@@ -60,6 +60,7 @@ class Post(db.Model):
         content= db.Column(db.String(400)) 
         comment_id= db.relationship('Comment',backref = 'posts',lazy="dynamic")  
         user_id = db.Column(db.Integer,db.ForeignKey('users.id'))  
+        
 
     
 
@@ -79,6 +80,10 @@ class Post(db.Model):
             posts= Post.query.all()
 
             return posts
+        def delete_post(self):
+            db.session.delete(self)
+            db.session.commit()
+
 
 
 
@@ -88,7 +93,7 @@ class Comment(db.Model):
 
         id = db.Column(db.Integer,primary_key = True)
         comment = db.Column(db.String(400))
-        user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
+        # user_id = db.Column(db.Integer,db.ForeignKey('users.id'))
         post_id= db.Column(db.Integer,db.ForeignKey('posts.id'))
 
 
@@ -114,6 +119,9 @@ class Quote:
             self.author =author
             self.id =id
             self.quote = quote
+
+
+
 
 
 

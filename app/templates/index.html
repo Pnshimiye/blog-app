@@ -22,43 +22,33 @@
     </head>
   
     <body>
+    <div class= container>
+
+    {%block content%}     
+    
+    <h1 style="background-color:rgb(161, 160, 160);height:50px;margin-top:20px;">COMMON BLOGGING PLATFORM</h1>
+    <h6>Before we begin here is an inspiration Quote for you. if you do not like this one, just reflesh the page until you get one that you like</h6>
 
 
+    <h4>{{quote.quote}}</h4>
+    <p>{{quote.author}}</p>             
+              
+      <h3> FOR WRITERS</h3>
 
 
-        
-        
+       <p>Oftentimes we have I deas and don't know how to share them due to lack of time. We have made the task easier for you. you do not have to create a blog.all you have to do is just CERATE AN ACCOUNT on this platform and share your ideas all you want. As a writer you can delete comments to your blog Post if you find them insulting or not constructive </p>
+       <h3>FOR SIMPLE VISITORS</h3> 
+        <p>If you are here just to read and would love to  be notified everytime a new blog post is made please click on the subscribe button and leave us your mail address</p>
 
-
-
-    {%block content%}
-        <div class="head"> 
-            <div class="body">
-                
-
-                <!-- <h1>60 SEC' PITCH</h1>
-
-                    <h4>Welcome!!!!<br> The 60 SEC' PITCH gives you a chance to impress your fellows  in whichever field you like.
-                        <br>  You have 60 seconds to write about yourself and say things that you believe will impress us.<br> 
-                        OR, you want to be impressed. join us by signing up, and let's go PITCH <h4>               
-     -->
-                 
-
-                 
-
-          
-                
-                
-            </div>
-        </div>
-    {%endblock%}       
-                    
-        
+    {%endblock%} 
+    </div> 
+                     
+         
         
         
 
     
+        
     
- 
-</body>
-</html>
+    </body>
+    </html>

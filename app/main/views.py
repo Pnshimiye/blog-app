@@ -1,6 +1,6 @@
 from flask import render_template,redirect,url_for,abort
 from . import main  
-# from .forms import UpdateProfile 
+from ..request import get_onequote 
 from ..models import User,Post,Comment,Subscription,Quote
 from flask_login import login_required,current_user
 from .. import db,photos 
@@ -8,14 +8,16 @@ from .forms import PostForm,CommentForm
 
 
 
-@main.route('/')
-def index():
-    """ View root page function that returns index page
-    """
-    all_posts = Post.get_posts()
+# @main.route('/')
+# def index():
+#     """ View root page function that returns index page
+#     """
+#     all_posts = Post.get_posts()
+#      quote = get_onequote()
+ 
 
-    title = 'Welcome to Blog Posts'
-    return render_template('index.html', title = title,all_posts=all_posts)
+#     title = 'Welcome to Blog Posts'
+#     return render_template('index.html', quote=quote) 
 
 
 
@@ -45,25 +47,52 @@ def display_post():
     return render_template("posts.html",all_posts=all_posts )
 
 
+
+@main.route('/posts')
+def delete_post():
+    removedPost = Post.delete_posts()  
+    return render_template("posts.html",removedPost=delete_post )
+
+
+
+
 @main.route('/comments/<int:id>', methods = ['GET','POST']) 
 def new_comment(id):
     form = CommentForm()  
-    post= Post.query.filter_by(id=id).first()
+    post=Post.query.filter_by(id=id).first()
 
     if form.validate_on_submit():
-        comment = form.comment.data    
+        comment = form.comment.data
+    
         new_comment = Comment(post_id=post.id,comment=comment)
         new_comment.save_comment()
         return redirect(url_for('main.index',comment=comment))
 
     return render_template('comments.html', comment_form=form)
 
-@main.route('/posts/')
-def diplay_comment(id):
-    comment = Comment.get_comment()
-    # print(all_pitches)
-    return render_template("comments.html",comment=comment,post_id=post.id)
 
+
+# @main.route('/quotes/<int:id>')
+# def quotes(quote_id):
+
+#     '''
+#     View quote page function that returns the quote details page and its data
+#     '''
+#     return render_template('quotes.html',id = quote_id)
+
+@main.route('/')
+def index():
+
+    '''
+    View quote page function that returns the quote details page and its data
+    '''
+    quote = get_onequote()
+ 
+
+    return render_template('index.html',quote=quote)
+
+
+ 
 
 
 # @main.route('/user/<uname>/update',methods = ['GET','POST'])
