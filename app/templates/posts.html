@@ -13,15 +13,24 @@
 </head>
 <body>
 {%block content%}
-  {% for post in all_posts%}
+  {% for post in all_posts %}
 
     <h2>{{post.user}}</h2>
     <h3>{{post.title}}</h3>
     <p>{{post.content}}</p>
-    <p>{{post.comment}}</p>
-    <a href ="comments/{{post.id}}">Comment</a>
-    
-     
+    <h4>comments</h4>
+                 {%for comment in post.comment%}
+             
+                 <p style="font-style:oblique;font-size: 18px;color:rgb(226, 188, 142)">{{comment.comment}}</p>
+                 
+                
+                 
+                 {%endfor%}
+                <a href ="comments/{{post.id}}"> Add Your Comment</a>  
+                <hr>
+
+               
+            
 
   {%endfor%}
   {%endblock%}

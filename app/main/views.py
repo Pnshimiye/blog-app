@@ -64,11 +64,27 @@ def new_comment(id):
     if form.validate_on_submit():
         comment = form.comment.data
     
-        new_comment = Comment(post_id=post.id,comment=comment)
+        new_comment = Comment(post_id=id,comment=comment)
         new_comment.save_comment()
         return redirect(url_for('main.index',comment=comment))
 
     return render_template('comments.html', comment_form=form)
+
+
+
+ 
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
