@@ -3,21 +3,24 @@
 
 ## Description
 
-This is an online application where users after registering to it, are able to submit any pitches they want in several categories, and comment on others's pitches
+This is an online application that allows common blogging.   the landing page contains an randomly generated quote for the users' inspiration. Only registered users are able to add their blog posts.
+Other users who want to juust reaf can only subscribe by leaving their email addresses and they  are notified whenever a mew blog post is made.
 
 ## Author
 Done by Pauline Nshimiye a student at Moringa School
 
 ## Functionality
 
-Any user who browses in the application can view pitches that have been posted including their comments
-For a user to post a pitch they have to sign in or sign up(register), if it is their fort time to use the application
+Any user who browses in the application  can read blog poststhat have been posted including their comments
+For a user to write and post their blog post they have to sign in or sign up(register), if it is their first time to use the application
 When a user signs up(registers) they  automatically receive a welcoming email to the mail address provided during registration
-Users can also upvote and downvote pitches. for this they do not have to be registered users
+simple readers who provide their email addresses by clicking the sunscribe button, are notified everytime a new blog post is made.
+If the owner of  a blog post is not happy with a comment made or finds it innapropriate , only he/she can delete it.
+ 
 
 
 ## Setup Instructions
-For One to be able to open this project and view its code, all they need is a web browser. This project is deployed on Heroku on this link.....]
+For One to be able to open this project and view its code, all they need is a web browser. This project is deployed on Heroku on this link:https://github.com/Pnshimiye/blog-app
 
 ## Technologies used
 In case you would like to give your contribution here are the technologies used:

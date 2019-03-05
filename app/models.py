@@ -76,10 +76,9 @@ class Post(db.Model):
 
         @classmethod
         def get_posts(id):
-
             posts= Post.query.all()
-
             return posts
+
         def delete_post(self):
             db.session.delete(self)
             db.session.commit()
@@ -102,9 +101,9 @@ class Comment(db.Model):
             db.session.commit()
 
         @classmethod
-        def get_comment():
+        def get_comment(self,id):
 
-            comment= Comment.query.filter_by(post_id)     
+            comment= Comment.query.filter_by(post_id=id).all()     
 
             return comment
 
@@ -125,15 +124,29 @@ class Quote:
 
 
 
-class Subscription(db.Model):
-        __tablename__ ='subscriptions'
+class Subscriber(UserMixin, db.Model):
+   __tablename__="subscribers"
 
-        id = db.Column(db.Integer,primary_key = True)
-        email = db.Column(db.String(400))
-        
-        
+   id = db.Column(db.Integer, primary_key=True)
+   name = db.Column(db.String(255))
+   email = db.Column(db.String(255),unique = True,index = True)
 
 
+   def save_subscriber(self):
+       db.session.add(self)
+       db.session.commit()
+
+   @classmethod
+   def get_subscribers(cls,id):
+       return Subscriber.query.all()
+
+
+   def __repr__(self):
+       return f'User {self.email}'
+
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(int(user_id))
 
 
 

@@ -1,10 +1,11 @@
 from flask import render_template,redirect,url_for,abort
 from . import main  
 from ..request import get_onequote 
-from ..models import User,Post,Comment,Subscription,Quote
+from ..models import User,Post,Comment,Subscriber,Quote
 from flask_login import login_required,current_user
 from .. import db,photos 
-from .forms import PostForm,CommentForm
+from .forms import PostForm,CommentForm,SubscriberForm
+from ..email import mail_message
 
 
 
@@ -55,8 +56,8 @@ def delete_post():
 
 
 
-
-@main.route('/comments/<int:id>', methods = ['GET','POST']) 
+@main.route('/comments/<int:id>', methods = ['GET','POST'])
+ 
 def new_comment(id):
     form = CommentForm()  
     post=Post.query.filter_by(id=id).first()
@@ -64,26 +65,29 @@ def new_comment(id):
     if form.validate_on_submit():
         comment = form.comment.data
     
-        new_comment = Comment(post_id=id,comment=comment)
+        new_comment = Comment(user_id=current_user.id,post_id=post.id,comment=comment)
         new_comment.save_comment()
         return redirect(url_for('main.index',comment=comment))
 
     return render_template('comments.html', comment_form=form)
 
 
-@main.route('/register',methods = ["GET","POST"])
-def register():
-    form = RegistrationForm()
+@main.route('/subscribe',methods=["GET","POST"])
+def subscriber():
+    form=SubscriberForm()
+
     if form.validate_on_submit():
-        user= User(email = form.email.data, username = form.username.data,password = form.password.data)
-        db.session.add(user)
+        subscriber = Subscriber(name=form.name.data,email=form.email.data)
+        db.session.add(subscriber)
         db.session.commit()
-        return redirect(url_for('auth.login'))
-        title = "New Account"
+
+        mail_message("Welcome to this platform","email/welcome_user",subscriber.email,subscriber=subscriber)
+        return redirect(url_for('main.index'))
+        title = 'Subscribe'
+    return render_template('subscription.html',form=form)
 
 
-    return render_template('auth/register.html',registration_form = form)
-
+ 
 
 
 
