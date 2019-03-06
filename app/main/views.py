@@ -50,9 +50,10 @@ def display_post():
 
 
 @main.route('/posts')
+@login_required
 def delete_post():
     removedPost = Post.delete_posts()  
-    return render_template("posts.html",removedPost=delete_post )
+    return render_template("posts.html",removedPost=removedPost )
 
 
 
